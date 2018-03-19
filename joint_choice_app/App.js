@@ -1,29 +1,43 @@
-// @flow
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Header, List, ListItem } from 'react-native-elements';
 
-type Props = {
+const list = [
+  {
+    name: 'Бойцовский клуб',
+    avatar_url: 'https://image.tmdb.org/t/p/w92/hTjHSmQGiaUMyIx3Z25Q1iktCFD.jpg'
+  },
+  {
+    name: 'Унесенные ветром',
+    avatar_url: 'https://image.tmdb.org/t/p/w92/ihdfdftLqhItvsUEx0CugJ0WGOc.jpg'
+  }
+];
 
-};
 
-export default class App extends React.Component<Props> {
+export default class App extends React.Component {
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View >
+        <Header
+          leftComponent={{ icon: 'menu', color: '#fff' }}
+          centerComponent={{ text: 'Movie', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'home', color: '#fff' }}
+        />
+        <List>
+          {
+            list.map((l, i) => (
+              <ListItem
+                
+                avatar={{ uri: l.avatar_url }}
+                key={i}
+                title={l.name}
+              />
+            ))
+          }
+        </List>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
