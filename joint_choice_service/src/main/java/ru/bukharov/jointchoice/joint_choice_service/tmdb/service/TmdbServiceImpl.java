@@ -39,11 +39,13 @@ public class TmdbServiceImpl implements TmdbService {
     private TmdbMovieDTO parseMovieJson(JSONObject jsonObject) {
         Long id = jsonObject.getLong("id");
         String title = jsonObject.getString("title");
+        String originalTitle = jsonObject.getString("original_title");
         String description = jsonObject.getString("overview");
 
         TmdbMovieDTO tmdbMovieDTO = new TmdbMovieDTO();
         tmdbMovieDTO.setId(id);
         tmdbMovieDTO.setTitle(title);
+        tmdbMovieDTO.setOriginalTitle(originalTitle);
         tmdbMovieDTO.setDescription(description);
 
         return tmdbMovieDTO;

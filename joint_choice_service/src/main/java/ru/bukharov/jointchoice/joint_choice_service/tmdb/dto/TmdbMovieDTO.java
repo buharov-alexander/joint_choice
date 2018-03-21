@@ -4,6 +4,7 @@ public class TmdbMovieDTO {
 
     private Long id;
     private String title;
+    private String originalTitle;
     private String description;
 
     public Long getId() {
@@ -20,6 +21,14 @@ public class TmdbMovieDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
     public String getDescription() {

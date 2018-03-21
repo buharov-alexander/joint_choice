@@ -19,11 +19,7 @@ public class TmdbController {
     @RequestMapping(value = "/movie/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    TmdbMovieDTO getMovie(@PathVariable Long id) {
-        try {
-            return tmdbService.getTmdbMovie(id);
-        } catch (Exception e) {
-            return null;
-        }
+    TmdbMovieDTO getTmdbMovie(@PathVariable Long id) throws Exception {
+        return tmdbService.getTmdbMovie(id);
     }
 }

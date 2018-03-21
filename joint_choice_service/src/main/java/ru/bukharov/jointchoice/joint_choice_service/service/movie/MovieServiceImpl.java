@@ -1,0 +1,24 @@
+package ru.bukharov.jointchoice.joint_choice_service.service.movie;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.bukharov.jointchoice.joint_choice_service.domain.movie.Movie;
+import ru.bukharov.jointchoice.joint_choice_service.repository.movie.MovieRepository;
+
+import java.util.Optional;
+
+@Service
+public class MovieServiceImpl implements MovieService {
+
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @Override
+    public Movie getMovie(Long id) throws Exception {
+        Optional<Movie> movie = movieRepository.findById(id);
+        if (!movie.isPresent()) {
+            throw new Exception(String.format("Cannot find a movie with id %s", id));
+        }
+        return movie.get();
+    }
+}
