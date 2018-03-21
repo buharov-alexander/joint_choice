@@ -1,4 +1,4 @@
-package ru.bukharov.jointchoice.joint_choice_service.dto;
+package ru.bukharov.jointchoice.joint_choice_service.dto.movie;
 
 public class MovieDTO {
 

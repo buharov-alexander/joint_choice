@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.bukharov.jointchoice.joint_choice_service.domain.movie.Movie;
-import ru.bukharov.jointchoice.joint_choice_service.dto.MovieDTO;
+import ru.bukharov.jointchoice.joint_choice_service.dto.movie.MovieDTO;
 import ru.bukharov.jointchoice.joint_choice_service.service.movie.MovieService;
 
 @Controller
