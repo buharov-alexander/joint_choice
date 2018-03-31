@@ -12,7 +12,7 @@ import ru.bukharov.jointchoice.server.dto.ErrorDTO;
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { Exception.class })
+    @ExceptionHandler(value = {Exception.class})
     protected ResponseEntity<Object> handleConflict(Exception ex, WebRequest request) {
         ErrorDTO dto = new ErrorDTO();
         dto.setErrorMessage(ex.getMessage());

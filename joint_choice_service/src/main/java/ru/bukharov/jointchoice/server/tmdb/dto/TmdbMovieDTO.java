@@ -11,4 +11,5 @@ public class TmdbMovieDTO {
     private String title;
     private String originalTitle;
     private String description;
+    private String posterPath;
 }

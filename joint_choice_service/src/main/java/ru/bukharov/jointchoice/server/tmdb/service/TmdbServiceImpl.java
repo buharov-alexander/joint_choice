@@ -1,5 +1,6 @@
 package ru.bukharov.jointchoice.server.tmdb.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bukharov.jointchoice.server.domain.movie.Movie;
+import ru.bukharov.jointchoice.server.domain.movie.MoviePoster;
 import ru.bukharov.jointchoice.server.json.JsonService;
 import ru.bukharov.jointchoice.server.repository.movie.MovieRepository;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
@@ -27,6 +29,9 @@ public class TmdbServiceImpl implements TmdbService {
     private JsonService jsonService;
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private TmdbPosterService tmdbPosterService;
+
     private Logger log = LoggerFactory.getLogger(TmdbServiceImpl.class);
 
     @Override
@@ -63,6 +68,17 @@ public class TmdbServiceImpl implements TmdbService {
         movie.setTitle(tmdbMovieDTO.getTitle());
         movie.setOriginalTitle(tmdbMovieDTO.getOriginalTitle());
         movie.setDescription(tmdbMovieDTO.getDescription());
+
+        String posterPath = tmdbMovieDTO.getPosterPath();
+        if (StringUtils.isNotEmpty(posterPath)) {
+            MoviePoster moviePoster = new MoviePoster();
+
+            byte[] image = tmdbPosterService.loadPoster(posterPath);
+            moviePoster.setImage(image);
+            moviePoster.setName(tmdbMovieDTO.getTitle());
+            movie.setPoster(moviePoster);
+        }
+
         return movie;
     }
 
@@ -71,12 +87,14 @@ public class TmdbServiceImpl implements TmdbService {
         String title = jsonObject.getString("title");
         String originalTitle = jsonObject.getString("original_title");
         String description = jsonObject.getString("overview");
+        String posterPath = jsonObject.getString("poster_path");
 
         TmdbMovieDTO tmdbMovieDTO = new TmdbMovieDTO();
         tmdbMovieDTO.setId(id);
         tmdbMovieDTO.setTitle(title);
         tmdbMovieDTO.setOriginalTitle(originalTitle);
         tmdbMovieDTO.setDescription(description);
+        tmdbMovieDTO.setPosterPath(posterPath);
 
         return tmdbMovieDTO;
     }
