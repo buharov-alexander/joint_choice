@@ -10,7 +10,7 @@ export default class MovieList extends React.Component {
     }
 
     componentDidMount() {
-        return fetch('http://192.168.1.100:8090/jointchoice/movie')
+        fetch('http://192.168.1.100:8090/jointchoice/movie')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -34,7 +34,7 @@ export default class MovieList extends React.Component {
                 {
                     this.state.movies.map((l, i) => (
                         <ListItem
-                            avatar={{ uri: l.avatar_url }}
+                            avatar={{ uri: 'http://192.168.1.100:8090/jointchoice/movie/poster/' + l.id }}
                             key={i}
                             title={l.title}
                             subtitle={l.originalTitle}
