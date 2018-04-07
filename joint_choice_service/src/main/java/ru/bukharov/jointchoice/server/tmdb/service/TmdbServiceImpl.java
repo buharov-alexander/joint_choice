@@ -1,20 +1,17 @@
 package ru.bukharov.jointchoice.server.tmdb.service;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bukharov.jointchoice.server.domain.movie.Movie;
 import ru.bukharov.jointchoice.server.domain.movie.MoviePoster;
-import ru.bukharov.jointchoice.server.json.JsonService;
 import ru.bukharov.jointchoice.server.repository.movie.MovieRepository;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
 
 import javax.validation.ValidationException;
-import java.io.IOException;
+import java.util.List;
 
 @Service
 public class TmdbServiceImpl implements TmdbService {
@@ -22,11 +19,13 @@ public class TmdbServiceImpl implements TmdbService {
     private static final String TMDB_SERVICE_URL = "https://api.themoviedb.org/3";
     private static final String API_KEY_PARAM = "api_key=3d48f25bce5b4986324f82122df4f932";
     private static final String RU_LANG_PARAM = "&language=ru-ru";
+    private static final String QUERY = "&query=";
     private static final String START_PARAM = "?" + API_KEY_PARAM + RU_LANG_PARAM;
     private static final String MOVIE = "/movie";
+    private static final String SEARCH_MOVIE = "/search/movie";
 
     @Autowired
-    private JsonService jsonService;
+    private JsonTmdbService jsonTmdbService;
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
@@ -37,14 +36,8 @@ public class TmdbServiceImpl implements TmdbService {
     @Override
     public TmdbMovieDTO getTmdbMovie(Long tmdbMovieId) throws Exception {
         validateId(tmdbMovieId);
-        try {
-            String url = TMDB_SERVICE_URL + MOVIE + "/" + tmdbMovieId + START_PARAM;
-            JSONObject jsonObject = jsonService.getJsonFromUrl(url);
-            return parseMovieJson(jsonObject);
-        } catch (IOException | JSONException e) {
-            log.error(e.getMessage(), e);
-            throw new Exception(String.format("Cannot get movie by %s: %s", tmdbMovieId, e.getMessage()), e);
-        }
+        String url = TMDB_SERVICE_URL + MOVIE + "/" + tmdbMovieId + START_PARAM;
+        return jsonTmdbService.getTmdbMovieFromUrl(url);
     }
 
     @Override
@@ -54,6 +47,12 @@ public class TmdbServiceImpl implements TmdbService {
         Movie movie = convertTmdbMovieDtoToMovie(tmdbMovieDTO);
         movie = movieRepository.save(movie);
         return movie;
+    }
+
+    @Override
+    public List<TmdbMovieDTO> searchTmdbMovies(String query) throws Exception {
+        String url = TMDB_SERVICE_URL + SEARCH_MOVIE + START_PARAM + QUERY + query;
+        return jsonTmdbService.getTmdbMovieListFromUrl(url);
     }
 
     private void validateId(Long tmdbMovieId) {
@@ -80,22 +79,5 @@ public class TmdbServiceImpl implements TmdbService {
         }
 
         return movie;
-    }
-
-    private TmdbMovieDTO parseMovieJson(JSONObject jsonObject) throws Exception {
-        Long id = jsonObject.getLong("id");
-        String title = jsonObject.getString("title");
-        String originalTitle = jsonObject.getString("original_title");
-        String description = jsonObject.getString("overview");
-        String posterPath = jsonObject.getString("poster_path");
-
-        TmdbMovieDTO tmdbMovieDTO = new TmdbMovieDTO();
-        tmdbMovieDTO.setId(id);
-        tmdbMovieDTO.setTitle(title);
-        tmdbMovieDTO.setOriginalTitle(originalTitle);
-        tmdbMovieDTO.setDescription(description);
-        tmdbMovieDTO.setPosterPath(posterPath);
-
-        return tmdbMovieDTO;
     }
 }
