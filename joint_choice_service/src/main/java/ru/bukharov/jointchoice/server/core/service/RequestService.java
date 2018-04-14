@@ -1,9 +1,10 @@
-package ru.bukharov.jointchoice.server.json;
+package ru.bukharov.jointchoice.server.core.service;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.bukharov.jointchoice.server.core.exception.RequestServiceException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,18 +15,20 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 @Service
-public class JsonService {
+public class RequestService {
 
-    private Logger log = LoggerFactory.getLogger(JsonService.class);
+    private Logger log = LoggerFactory.getLogger(RequestService.class);
 
-    public JSONObject getJsonFromUrl(String url) throws IOException {
+    public JSONObject getJsonFromUrl(String url) throws RequestServiceException {
+        assert url != null;
+
         try (InputStream is = new URL(url).openStream()) {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readString(rd);
             return new JSONObject(jsonText);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-            throw e;
+            throw new RequestServiceException(e);
         }
     }
 

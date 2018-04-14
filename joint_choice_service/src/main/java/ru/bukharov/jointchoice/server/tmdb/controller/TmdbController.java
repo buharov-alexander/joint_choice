@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bukharov.jointchoice.server.domain.movie.Movie;
-import ru.bukharov.jointchoice.server.dto.movie.MovieDTO;
-import ru.bukharov.jointchoice.server.dto.movie.MovieDtoAssembler;
+import ru.bukharov.jointchoice.server.moves.domain.Movie;
+import ru.bukharov.jointchoice.server.moves.dto.MovieDTO;
+import ru.bukharov.jointchoice.server.moves.dto.MovieDtoAssembler;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
 import ru.bukharov.jointchoice.server.tmdb.service.TmdbService;
 

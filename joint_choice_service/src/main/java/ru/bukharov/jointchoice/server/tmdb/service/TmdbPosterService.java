@@ -1,6 +1,6 @@
 package ru.bukharov.jointchoice.server.tmdb.service;
 
-public interface TmdbPosterService {
+interface TmdbPosterService {
 
-    byte[] loadPoster(String path);
+    byte[] loadPoster(String posterPath);
 }

@@ -1,4 +1,4 @@
-package ru.bukharov.jointchoice.server.dto;
+package ru.bukharov.jointchoice.server.core.dto;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package ru.bukharov.jointchoice.server.dto.movie;
+package ru.bukharov.jointchoice.server.moves.dto;
 
 import org.springframework.stereotype.Component;
-import ru.bukharov.jointchoice.server.domain.movie.Movie;
-import ru.bukharov.jointchoice.server.dto.DtoAssembler;
+import ru.bukharov.jointchoice.server.core.dto.DtoAssembler;
+import ru.bukharov.jointchoice.server.moves.domain.Movie;
 
 @Component
 public class MovieDtoAssembler extends DtoAssembler<Movie, MovieDTO> {

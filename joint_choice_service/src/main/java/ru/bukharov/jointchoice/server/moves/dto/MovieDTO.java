@@ -1,4 +1,4 @@
-package ru.bukharov.jointchoice.server.dto.movie;
+package ru.bukharov.jointchoice.server.moves.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -9,18 +9,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Service
-public class TmdbPosterServiceImpl implements TmdbPosterService {
+class TmdbPosterServiceImpl implements TmdbPosterService {
 
     private static final String TMDB_IMAGE_SERVICE_URL = "https://image.tmdb.org/t/p";
     private static final String TMDB_SMALL_SIZE = "/w92";
     private static final String TMDB_SMALL_POSTER_URL = TMDB_IMAGE_SERVICE_URL + TMDB_SMALL_SIZE;
 
     @Override
-    public byte[] loadPoster(String path) {
+    public byte[] loadPoster(String posterPath) {
         byte[] res = new byte[0];
 
         try {
-            URL url = new URL(TMDB_SMALL_POSTER_URL + path);
+            URL url = new URL(TMDB_SMALL_POSTER_URL + posterPath);
             try (InputStream is = url.openStream();
                  ByteArrayOutputStream out = new ByteArrayOutputStream()) {
 

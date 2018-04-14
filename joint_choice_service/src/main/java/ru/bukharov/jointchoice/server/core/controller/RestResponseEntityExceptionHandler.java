@@ -1,4 +1,4 @@
-package ru.bukharov.jointchoice.server.controller;
+package ru.bukharov.jointchoice.server.core.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.bukharov.jointchoice.server.dto.ErrorDTO;
+import ru.bukharov.jointchoice.server.core.dto.ErrorDTO;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
