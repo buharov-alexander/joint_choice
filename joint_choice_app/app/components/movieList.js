@@ -1,7 +1,7 @@
 import React from 'react';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Header } from 'react-native-elements';
 
-export default MovieList = ({ movies }) => {
+export default MovieList = ({ movies, navigation }) => {
     return (
         <List>
             {
@@ -11,9 +11,11 @@ export default MovieList = ({ movies }) => {
                         key={movie.id}
                         title={movie.title}
                         subtitle={movie.originalTitle}
+                        onPress={() => navigation.navigate('MovieDetails')}
                     />
                 ))
             }
         </List>
     );
 };
+

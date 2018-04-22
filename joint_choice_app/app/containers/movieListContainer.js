@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
-import { loadMovies } from '../actions/movieActions'
-import MovieList from '../components/MovieList'
+import { loadMovies } from '../actions/movieActions';
+import MovieList from '../components/movieList';
 
-class MovieContainer extends React.Component {
+class MovieListContainer extends React.Component {
+    static navigationOptions = {
+        title: 'Movie',
+    };
 
     componentDidMount() {
         this.props.actions.getMovies();
@@ -12,7 +15,7 @@ class MovieContainer extends React.Component {
 
     render() {
         return (
-            <MovieList movies={this.props.movies} />
+            <MovieList {...this.props} />
         );
     }
 }
@@ -33,4 +36,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieListContainer);
