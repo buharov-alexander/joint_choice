@@ -18,8 +18,10 @@ class JsonTmdbService {
     private static final String POSTER_PATH = "poster_path";
     private static final String RESULTS = "results";
 
-    protected List<TmdbMovieDTO> parseMovieListJson(JSONObject json) {
-        JSONArray results = json.getJSONArray(RESULTS);
+    protected List<TmdbMovieDTO> parseMovieListJson(JSONObject jsonObject) {
+        assert jsonObject != null;
+
+        JSONArray results = jsonObject.getJSONArray(RESULTS);
         List<TmdbMovieDTO> res = new ArrayList<>();
         for (Object jsonObj : results) {
             res.add(parseTmdbMovieJson((JSONObject) jsonObj));
@@ -28,6 +30,8 @@ class JsonTmdbService {
     }
 
     protected TmdbMovieDTO parseTmdbMovieJson(JSONObject jsonObject) {
+        assert jsonObject != null;
+
         Long id = jsonObject.getLong(ID);
         String title = jsonObject.getString(TITLE);
         String originalTitle = jsonObject.getString(ORIGINAL_TITLE);
