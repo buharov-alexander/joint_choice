@@ -2,17 +2,23 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import MovieContainer from '../containers/movieListContainer';
 import MovieDetailsContainer from '../containers/movieDetailsContainer';
+import {
+    MOVIES_SCREEN,
+    MOVIE_DETAILS_SCREEN
+} from '../constants/screenTypes';
+
+const screens = {};
+
+screens[MOVIES_SCREEN] = {
+    screen: MovieContainer
+};
+screens[MOVIE_DETAILS_SCREEN] = {
+    screen: MovieDetailsContainer
+};
 
 export default Navigator = StackNavigator(
+    screens,
     {
-        Movies: {
-            screen: MovieContainer,
-        },
-        MovieDetails: {
-            screen: MovieDetailsContainer,
-        },
-    },
-    {
-        initialRouteName: 'Movies',
+        initialRouteName: MOVIES_SCREEN
     }
 );

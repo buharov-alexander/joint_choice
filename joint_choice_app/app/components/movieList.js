@@ -1,5 +1,8 @@
 import React from 'react';
 import { List, ListItem, Header } from 'react-native-elements';
+import {
+    MOVIE_DETAILS_SCREEN
+} from '../constants/screenTypes';
 
 export default MovieList = ({ movies, navigation }) => {
     return (
@@ -11,7 +14,7 @@ export default MovieList = ({ movies, navigation }) => {
                         key={movie.id}
                         title={movie.title}
                         subtitle={movie.originalTitle}
-                        onPress={() => navigation.navigate('MovieDetails')}
+                        onPress={() => navigation.navigate(MOVIE_DETAILS_SCREEN)}
                     />
                 ))
             }
