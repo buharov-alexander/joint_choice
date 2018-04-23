@@ -4,7 +4,8 @@ import { ActivityIndicator } from 'react-native';
 import { loadMovies } from '../actions/movieActions';
 import MovieList from '../components/movieList';
 
-class MovieListContainer extends React.Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MovieContainer extends React.Component {
     static navigationOptions = {
         title: 'Movie',
     };
@@ -35,5 +36,3 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieListContainer);

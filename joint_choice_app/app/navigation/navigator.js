@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import MovieContainer from '../containers/movieListContainer';
+import MovieContainer from '../containers/movieContainer';
 import MovieDetailsContainer from '../containers/movieDetailsContainer';
 import {
     MOVIES_SCREEN,
