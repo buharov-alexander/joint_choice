@@ -7,18 +7,17 @@ import {
     MOVIE_DETAILS_SCREEN
 } from '../constants/screenTypes';
 
-const screens = {};
+const routeConfigs = {};
 
-screens[MOVIES_SCREEN] = {
+routeConfigs[MOVIES_SCREEN] = {
     screen: MovieContainer
 };
-screens[MOVIE_DETAILS_SCREEN] = {
+routeConfigs[MOVIE_DETAILS_SCREEN] = {
     screen: MovieDetailsContainer
 };
 
-export default Navigator = StackNavigator(
-    screens,
-    {
-        initialRouteName: MOVIES_SCREEN
-    }
-);
+const stackNavigatorConfig = {
+    initialRouteName: MOVIES_SCREEN
+};
+
+export default Navigator = StackNavigator(routeConfigs, stackNavigatorConfig);
