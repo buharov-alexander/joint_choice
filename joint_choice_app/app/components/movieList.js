@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'react-native-elements';
+import { getPosterUrl } from '../server/movie';
 import { MOVIE_DETAILS_SCREEN } from '../constants/screenTypes';
 
 const MovieList = ({ movies, navigation }) => (
@@ -8,7 +9,7 @@ const MovieList = ({ movies, navigation }) => (
     {
       movies.toList().map(movie => (
         <ListItem
-          avatar={{ uri: `http://192.168.1.100:8090/jointchoice/movie/poster/${movie.id}` }}
+          avatar={{ uri: getPosterUrl(movie.id) }}
           key={movie.id}
           title={movie.title}
           subtitle={movie.originalTitle}

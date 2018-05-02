@@ -1,3 +1,4 @@
+import { fetchMovies } from '../server/movie';
 import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
@@ -9,7 +10,7 @@ export const loadMovies = () =>
   (dispatch) => {
     dispatch({ type: FETCH_REQUEST });
 
-    fetch('http://192.168.0.106:8090/jointchoice/movie')
+    fetchMovies()
       .then(response => response.json())
       .then((responseJson) => {
         dispatch({ type: LOAD_MOVIES_SUCCESS, payload: responseJson });
