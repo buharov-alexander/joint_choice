@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import SearchForm from '../components/movieSearch/searchForm';
 
 @connect()
 export default class movieSearchContainer extends React.Component {
@@ -11,7 +12,7 @@ export default class movieSearchContainer extends React.Component {
   render() {
     return (
       <View >
-        <Text>Search page</Text>
+        <SearchForm />
       </View>
     );
   }
