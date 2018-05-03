@@ -13,7 +13,8 @@ class TmdbPosterServiceImpl implements TmdbPosterService {
 
     private static final String TMDB_IMAGE_SERVICE_URL = "https://image.tmdb.org/t/p";
     private static final String TMDB_SMALL_SIZE = "/w92";
-    private static final String TMDB_SMALL_POSTER_URL = TMDB_IMAGE_SERVICE_URL + TMDB_SMALL_SIZE;
+    private static final String TMDB_MIDDLE_SIZE = "/w342";
+    private static final String TMDB_SMALL_POSTER_URL = TMDB_IMAGE_SERVICE_URL + TMDB_MIDDLE_SIZE;
 
     @Override
     public byte[] loadPoster(String posterPath) {

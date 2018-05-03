@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadMovies } from '../actions/movieActions';
+import { loadMovies, loadMovie } from '../actions/movieActions';
 import MovieList from '../components/movieList';
+import { MOVIE_DETAILS_SCREEN } from '../constants/screenTypes';
+import { SET_CURRENT_MOVIE_DETAILS } from '../constants/actionTypes';
 
 function mapStateToProps(state) {
   return {
@@ -13,7 +15,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      getMovies: () => dispatch(loadMovies()),
+      loadMovies: () => dispatch(loadMovies()),
+      loadMovie: movieId => dispatch(loadMovie(movieId)),
+      setCurrentMovieDetails: movieId => dispatch({
+        type: SET_CURRENT_MOVIE_DETAILS,
+        payload: movieId,
+      }),
     },
   };
 }
@@ -26,15 +33,25 @@ export default class MovieContainer extends React.Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    this.props.actions.getMovies();
+    this.props.actions.loadMovies();
+  }
+
+  onPressToItem = (movie) => {
+    this.props.actions.loadMovie(movie.id);
+    this.props.actions.setCurrentMovieDetails(movie.id);
+    this.props.navigation.navigate(MOVIE_DETAILS_SCREEN);
   }
 
   render() {
     return (
-      <MovieList {...this.props} />
+      <MovieList
+        {...this.props}
+        onPressToItem={this.onPressToItem}
+      />
     );
   }
 }

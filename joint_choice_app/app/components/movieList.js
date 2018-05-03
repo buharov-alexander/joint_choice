@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'react-native-elements';
 import { getPosterUrl } from '../server/movie';
-import { MOVIE_DETAILS_SCREEN } from '../constants/screenTypes';
 
-const MovieList = ({ movies, navigation }) => (
+const MovieList = ({ movies, onPressToItem }) => (
   <List>
     {
       movies.toList().map(movie => (
@@ -13,7 +12,7 @@ const MovieList = ({ movies, navigation }) => (
           key={movie.id}
           title={movie.title}
           subtitle={movie.originalTitle}
-          onPress={() => navigation.navigate(MOVIE_DETAILS_SCREEN)}
+          onPress={() => onPressToItem(movie)}
         />
       ))
     }
@@ -22,7 +21,7 @@ const MovieList = ({ movies, navigation }) => (
 
 MovieList.propTypes = {
   movies: PropTypes.object.isRequired,
-  navigation: PropTypes.object.isRequired,
+  onPressToItem: PropTypes.func.isRequired,
 };
 
 export default MovieList;
