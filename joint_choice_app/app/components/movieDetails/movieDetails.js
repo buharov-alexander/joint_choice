@@ -1,14 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
 import { getPosterUrl } from '../../server/movie';
-
-function mapStateToProps(state) {
-  return {
-    currentMovieDetails: state.movie.currentMovieDetails,
-  };
-}
 
 const styles = StyleSheet.create({
   top: {
@@ -27,8 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-@connect(mapStateToProps)
-export default class MovieDetails extends React.Component {
+export default class MovieDetails extends React.PureComponent {
   static propTypes = {
     currentMovieDetails: PropTypes.object.isRequired,
   }

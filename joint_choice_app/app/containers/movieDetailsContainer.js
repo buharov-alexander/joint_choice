@@ -4,7 +4,7 @@ import MovieDetails from '../components/movieDetails/movieDetails';
 
 function mapStateToProps(state) {
   return {
-    movies: state.movie.moviesById,
+    currentMovieDetails: state.movie.currentMovieDetails,
   };
 }
 

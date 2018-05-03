@@ -10,8 +10,8 @@ const initialState = {
   currentMovieDetails: {},
 };
 
-const handleLoadMovies = (state, actionPayload) => {
-  const movieMap = actionPayload.reduce(
+const handleLoadMovies = (state, movieList) => {
+  const movieMap = movieList.reduce(
     (map, movie) => map.set(movie.id, movie),
     Immutable.Map(),
   );
