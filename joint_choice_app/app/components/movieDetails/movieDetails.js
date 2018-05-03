@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
-import { Card } from 'react-native-elements';
-import { getPosterUrl } from '../server/movie';
+import { getPosterUrl } from '../../server/movie';
 
 function mapStateToProps(state) {
   return {
@@ -14,7 +13,6 @@ function mapStateToProps(state) {
 const styles = StyleSheet.create({
   top: {
     flex: 1,
-    // minHeight: 200,
     flexDirection: 'row',
     margin: 5,
   },
@@ -58,9 +56,7 @@ export default class MovieDetails extends React.Component {
         </View>
         <View style={styles.down}>
           <ScrollView>
-            <Card>
-              <Text>{description}</Text>
-            </Card>
+            <Text>{description}</Text>
           </ScrollView>
         </View>
       </View>

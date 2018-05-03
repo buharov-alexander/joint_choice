@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadMovies, loadMovie } from '../actions/movieActions';
-import MovieList from '../components/movieList';
-import { MOVIE_DETAILS_SCREEN } from '../constants/screenTypes';
+import MovieList from '../components/movieList/movieList';
+import SearchMovieButton from '../components/movieList/searchMovieButton';
+import { MOVIE_DETAILS_SCREEN, MOVIE_SEARCH_SCREEN } from '../constants/screenTypes';
 import { SET_CURRENT_MOVIE_DETAILS } from '../constants/actionTypes';
 
 function mapStateToProps(state) {
@@ -27,8 +28,15 @@ function mapDispatchToProps(dispatch) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class MovieContainer extends React.Component {
-  static navigationOptions = {
-    title: 'Movie',
+  static navigationOptions = ({ navigation }) => {
+    const button = (<SearchMovieButton
+      onPress={() => navigation.navigate(MOVIE_SEARCH_SCREEN)}
+    />);
+
+    return {
+      title: 'Movie',
+      headerRight: button,
+    };
   };
 
   static propTypes = {
