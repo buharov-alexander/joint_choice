@@ -12,6 +12,7 @@ import ru.bukharov.jointchoice.server.moves.domain.MoviePoster;
 import ru.bukharov.jointchoice.server.moves.service.MovieService;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 @Service
@@ -59,6 +60,7 @@ class TmdbServiceImpl implements TmdbService {
     public List<TmdbMovieDTO> searchTmdbMovies(String query) throws Exception {
         validateQuery(query);
 
+        query = URLEncoder.encode(query, "UTF-8");
         String url = TMDB_SERVICE_URL + SEARCH_MOVIE + START_PARAM + QUERY + query;
         JSONObject json = requestService.getJsonFromUrl(url);
         return jsonTmdbService.parseMovieListJson(json);

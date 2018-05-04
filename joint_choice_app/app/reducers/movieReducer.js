@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   moviesById: Immutable.Map(),
+  foundMovieList: Immutable.List(),
   currentMovieDetails: {},
 };
 

@@ -2,20 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { getPosterUrl } from '../../server/movie';
 
-const MovieList = ({ movies, onPressToItem }) => (
+const FoundMovieList = ({ foundMovies }) => (
   <View>
     <ScrollView>
       <List>
         {
-          movies.toList().map(movie => (
+          foundMovies.map(movie => (
             <ListItem
-              avatar={{ uri: getPosterUrl(movie.id) }}
               key={movie.id}
               title={movie.title}
               subtitle={movie.originalTitle}
-              onPress={() => onPressToItem(movie)}
+              onPress={() => { }}
             />
           ))
         }
@@ -24,9 +22,8 @@ const MovieList = ({ movies, onPressToItem }) => (
   </View>
 );
 
-MovieList.propTypes = {
-  movies: PropTypes.object.isRequired,
-  onPressToItem: PropTypes.func.isRequired,
+FoundMovieList.propTypes = {
+  foundMovies: PropTypes.object.isRequired,
 };
 
-export default MovieList;
+export default FoundMovieList;
