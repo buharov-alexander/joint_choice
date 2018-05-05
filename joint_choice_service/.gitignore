@@ -22,3 +22,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### Images ###
+src/main/resources/images/cache/
+src/main/resources/images/posters/

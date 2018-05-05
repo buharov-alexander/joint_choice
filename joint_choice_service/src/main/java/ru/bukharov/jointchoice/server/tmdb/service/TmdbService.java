@@ -12,4 +12,6 @@ public interface TmdbService {
     Movie saveTmdbMovie(Long tmdbMovieId) throws Exception;
 
     List<TmdbMovieDTO> searchTmdbMovies(String query) throws Exception;
+
+    byte[] getMoviePoster(Long tmdbMovieId) throws Exception;
 }

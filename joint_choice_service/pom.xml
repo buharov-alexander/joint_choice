@@ -22,6 +22,9 @@
 		<org.json.version>20160810</org.json.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<commons.io.version>2.6</commons.io.version>
+		<commons.lang3.version>3.7</commons.lang3.version>
+		<lombok.version>1.16.20</lombok.version>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -58,7 +61,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.20</version>
+			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -66,7 +69,14 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.7</version>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+
+		<!--commons IO-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
 		</dependency>
 
 		<dependency>

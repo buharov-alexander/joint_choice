@@ -66,6 +66,12 @@ class TmdbServiceImpl implements TmdbService {
         return jsonTmdbService.parseMovieListJson(json);
     }
 
+    @Override
+    public byte[] getMoviePoster(Long tmdbMovieId) throws Exception {
+        TmdbMovieDTO tmdbMovieDTO = getTmdbMovie(tmdbMovieId);
+        return tmdbPosterService.loadPoster(tmdbMovieDTO.getPosterPath(), true);
+    }
+
     private void validateQuery(String query) {
         if (StringUtils.isEmpty(query)) {
             String mes = "Search query is empty";
@@ -93,7 +99,7 @@ class TmdbServiceImpl implements TmdbService {
         if (StringUtils.isNotEmpty(posterPath)) {
             MoviePoster moviePoster = new MoviePoster();
 
-            byte[] image = tmdbPosterService.loadPoster(posterPath);
+            byte[] image = tmdbPosterService.loadPoster(posterPath, true);
             moviePoster.setImage(image);
             moviePoster.setName(tmdbMovieDTO.getTitle());
             movie.setPoster(moviePoster);
