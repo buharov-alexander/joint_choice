@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
-import { getPosterUrl } from '../../server/movie';
+import { getPosterUrl } from '../../server/movieApi';
 
 const styles = StyleSheet.create({
   top: {

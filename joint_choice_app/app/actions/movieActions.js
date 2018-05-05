@@ -1,4 +1,5 @@
-import { fetchMovies, fetchMovie, findMovies } from '../server/movie';
+import { fetchMovies, fetchMovie } from '../server/movieApi';
+import { findMovies } from '../server/tmdbMovieApi';
 import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
