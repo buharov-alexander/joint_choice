@@ -4,16 +4,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 @Service
@@ -27,17 +22,26 @@ class TmdbPosterServiceImpl implements TmdbPosterService {
 
     private Logger log = LoggerFactory.getLogger(TmdbPosterServiceImpl.class);
 
+    private boolean usePosterCache;
+
+    public TmdbPosterServiceImpl(@Value("${use.poster.cache}") String usePosterCacheProperty) {
+        this.usePosterCache = Boolean.parseBoolean(usePosterCacheProperty);
+    }
+
     @Override
     public byte[] loadPoster(String posterPath, boolean saveToCache) {
         try {
-            byte[] res = findInCache(posterPath);
-            if (res != null) {
-                return res;
+            byte[] res;
+            if (usePosterCache) {
+                res = findInCache(posterPath);
+                if (res != null) {
+                    return res;
+                }
             }
 
             URL url = new URL(TMDB_SMALL_POSTER_URL + posterPath);
             res = IOUtils.toByteArray(url);
-            if (saveToCache) {
+            if (saveToCache && usePosterCache) {
                 savePoster(res, posterPath);
             }
 
