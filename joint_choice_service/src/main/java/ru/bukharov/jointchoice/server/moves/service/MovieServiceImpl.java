@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.bukharov.jointchoice.server.core.service.PosterService;
+import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
 import ru.bukharov.jointchoice.server.moves.exception.MovieServiceException;
 import ru.bukharov.jointchoice.server.moves.repository.MovieRepository;
@@ -17,6 +19,8 @@ class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private PosterService posterService;
 
     private Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
@@ -46,6 +50,14 @@ class MovieServiceImpl implements MovieService {
         //TODO: add validation
 
         return movieRepository.save(movie);
+    }
+
+    @Override
+    public byte[] getMoviePoster(Long id, PosterType posterType) throws MovieServiceException {
+        Movie movie = getMovie(id);
+        String posterPath = movie.getPosterPath();
+
+        return posterService.findPoster(posterPath, posterType);
     }
 
     private void validateId(Long id) {

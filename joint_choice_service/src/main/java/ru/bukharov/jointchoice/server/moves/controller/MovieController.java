@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
-import ru.bukharov.jointchoice.server.moves.domain.MoviePoster;
 import ru.bukharov.jointchoice.server.moves.dto.MovieDTO;
 import ru.bukharov.jointchoice.server.moves.dto.MovieDtoAssembler;
 import ru.bukharov.jointchoice.server.moves.service.MovieService;
@@ -32,15 +32,13 @@ public class MovieController {
         return assembler.convertToDto(movie);
     }
 
-    @RequestMapping(value = "/poster/{id}",
+    @RequestMapping(value = "/poster/{posterType}/{id}",
             method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public
     @ResponseBody
-    byte[] getMoviePoster(@PathVariable Long id) throws Exception {
-        Movie movie = movieService.getMovie(id);
-        MoviePoster poster = movie.getPoster();
-        return poster.getImage();
+    byte[] getMoviePoster(@PathVariable PosterType posterType, @PathVariable Long id) throws Exception {
+        return movieService.getMoviePoster(id, posterType);
     }
 
     @RequestMapping(method = RequestMethod.GET)

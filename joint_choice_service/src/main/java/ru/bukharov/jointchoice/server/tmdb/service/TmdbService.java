@@ -1,5 +1,6 @@
 package ru.bukharov.jointchoice.server.tmdb.service;
 
+import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
 
@@ -13,5 +14,5 @@ public interface TmdbService {
 
     List<TmdbMovieDTO> searchTmdbMovies(String query) throws Exception;
 
-    byte[] getMoviePoster(Long tmdbMovieId) throws Exception;
+    byte[] getMoviePoster(Long tmdbMovieId, PosterType posterType) throws Exception;
 }

@@ -5,11 +5,10 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.core.service.RequestService;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
-import ru.bukharov.jointchoice.server.moves.domain.MoviePoster;
 import ru.bukharov.jointchoice.server.moves.service.MovieService;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
 
@@ -53,6 +52,8 @@ class TmdbServiceImpl implements TmdbService {
         TmdbMovieDTO tmdbMovieDTO = getTmdbMovie(tmdbMovieId);
 
         Movie movie = convertTmdbMovieDtoToMovie(tmdbMovieDTO);
+        tmdbPosterService.loadAndSavePoster(movie.getPosterPath(), PosterType.SMALL);
+        tmdbPosterService.loadAndSavePoster(movie.getPosterPath(), PosterType.MIDDLE);
         movie = movieService.save(movie);
         return movie;
     }
@@ -68,9 +69,9 @@ class TmdbServiceImpl implements TmdbService {
     }
 
     @Override
-    public byte[] getMoviePoster(Long tmdbMovieId) throws Exception {
+    public byte[] getMoviePoster(Long tmdbMovieId, PosterType posterType) throws Exception {
         TmdbMovieDTO tmdbMovieDTO = getTmdbMovie(tmdbMovieId);
-        return tmdbPosterService.loadPoster(tmdbMovieDTO.getPosterPath(), true);
+        return tmdbPosterService.loadPoster(tmdbMovieDTO.getPosterPath(), posterType);
     }
 
     private void validateQuery(String query) {
@@ -95,16 +96,7 @@ class TmdbServiceImpl implements TmdbService {
         movie.setTitle(tmdbMovieDTO.getTitle());
         movie.setOriginalTitle(tmdbMovieDTO.getOriginalTitle());
         movie.setDescription(tmdbMovieDTO.getDescription());
-
-        String posterPath = tmdbMovieDTO.getPosterPath();
-        if (StringUtils.isNotEmpty(posterPath)) {
-            MoviePoster moviePoster = new MoviePoster();
-
-            byte[] image = tmdbPosterService.loadPoster(posterPath, true);
-            moviePoster.setImage(image);
-            moviePoster.setName(tmdbMovieDTO.getTitle());
-            movie.setPoster(moviePoster);
-        }
+        movie.setPosterPath(tmdbMovieDTO.getPosterPath());
 
         return movie;
     }

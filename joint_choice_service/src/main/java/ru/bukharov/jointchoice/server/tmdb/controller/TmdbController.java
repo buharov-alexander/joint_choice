@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
-import ru.bukharov.jointchoice.server.moves.domain.MoviePoster;
 import ru.bukharov.jointchoice.server.moves.dto.MovieDTO;
 import ru.bukharov.jointchoice.server.moves.dto.MovieDtoAssembler;
 import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
@@ -42,13 +42,13 @@ public class TmdbController {
         return tmdbService.searchTmdbMovies(query);
     }
 
-    @RequestMapping(value = "/movie/poster/{tmdbMovieId}",
+    @RequestMapping(value = "/movie/poster/{posterType}/{tmdbMovieId}",
             method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public
     @ResponseBody
-    byte[] getMoviePoster(@PathVariable Long tmdbMovieId) throws Exception {
-        return tmdbService.getMoviePoster(tmdbMovieId);
+    byte[] getMoviePoster(@PathVariable PosterType posterType, @PathVariable Long tmdbMovieId) throws Exception {
+        return tmdbService.getMoviePoster(tmdbMovieId, posterType);
     }
 
 }

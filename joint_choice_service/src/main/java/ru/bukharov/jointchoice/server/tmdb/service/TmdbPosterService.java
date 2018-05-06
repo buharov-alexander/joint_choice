@@ -1,6 +1,10 @@
 package ru.bukharov.jointchoice.server.tmdb.service;
 
+import ru.bukharov.jointchoice.server.core.service.PosterType;
+
 interface TmdbPosterService {
 
-    byte[] loadPoster(String posterPath, boolean saveToCache);
+    byte[] loadAndSavePoster(String posterPath, PosterType posterType);
+
+    byte[] loadPoster(String posterPath, PosterType posterType);
 }

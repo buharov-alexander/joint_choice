@@ -15,6 +15,7 @@ public class MovieDtoAssembler extends DtoAssembler<Movie, MovieDTO> {
         dto.setTitle(movie.getTitle());
         dto.setOriginalTitle(movie.getOriginalTitle());
         dto.setDescription(movie.getDescription());
+        dto.setPosterPath(movie.getPosterPath());
 
         return dto;
     }
