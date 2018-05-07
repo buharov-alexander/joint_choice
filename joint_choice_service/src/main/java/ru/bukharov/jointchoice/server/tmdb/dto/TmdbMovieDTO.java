@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class TmdbMovieDTO {
 
-    private Long id;
+    private Long tmdbId;
     private String title;
     private String originalTitle;
     private String description;

@@ -38,7 +38,7 @@ class JsonTmdbService {
         String description = jsonObject.getString(OVERVIEW);
 
         TmdbMovieDTO tmdbMovieDTO = new TmdbMovieDTO();
-        tmdbMovieDTO.setId(id);
+        tmdbMovieDTO.setTmdbId(id);
         tmdbMovieDTO.setTitle(title);
         tmdbMovieDTO.setOriginalTitle(originalTitle);
         tmdbMovieDTO.setDescription(description);

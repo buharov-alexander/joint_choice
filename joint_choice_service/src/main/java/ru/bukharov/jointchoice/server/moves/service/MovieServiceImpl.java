@@ -105,7 +105,7 @@ class MovieServiceImpl implements MovieService {
 
     private Movie convertTmdbMovieDtoToMovie(TmdbMovieDTO tmdbMovieDTO) {
         Movie movie = new Movie();
-        movie.setTmdbId(tmdbMovieDTO.getId());
+        movie.setTmdbId(tmdbMovieDTO.getTmdbId());
         movie.setTitle(tmdbMovieDTO.getTitle());
         movie.setOriginalTitle(tmdbMovieDTO.getOriginalTitle());
         movie.setDescription(tmdbMovieDTO.getDescription());
