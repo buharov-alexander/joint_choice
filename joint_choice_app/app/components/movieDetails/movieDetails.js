@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
-import { getPosterUrl } from '../../server/movieApi';
+import { getMiddlePosterUrl } from '../../server/movieApi';
 
 const styles = StyleSheet.create({
   top: {
@@ -39,7 +39,7 @@ export default class MovieDetails extends React.PureComponent {
           <Image
             style={styles.image}
             resizeMode="contain"
-            source={{ uri: getPosterUrl(id) }}
+            source={{ uri: getMiddlePosterUrl(id) }}
           />
           <View style={styles.info}>
             <Text>{title}</Text>
