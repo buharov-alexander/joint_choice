@@ -43,11 +43,11 @@ public class MovieController {
         movieService.removeMovieByTmdbMovieId(tmdbMovieId);
     }
 
-    @RequestMapping(value = "/poster/{posterType}/{id}",
+    @RequestMapping(value = "/poster/{posterType}/{tmdbMovieId}",
             method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getMoviePoster(@PathVariable PosterType posterType, @PathVariable Long id) throws Exception {
-        return movieService.getMoviePoster(id, posterType);
+    public byte[] getMoviePoster(@PathVariable PosterType posterType, @PathVariable Long tmdbMovieId) throws Exception {
+        return movieService.getMoviePoster(tmdbMovieId, posterType);
     }
 
     @RequestMapping(method = RequestMethod.GET)

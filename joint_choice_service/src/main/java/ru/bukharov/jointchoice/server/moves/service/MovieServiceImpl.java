@@ -57,8 +57,8 @@ class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public byte[] getMoviePoster(Long id, PosterType posterType) throws MovieServiceException {
-        Movie movie = getMovie(id);
+    public byte[] getMoviePoster(Long tmdbMovieId, PosterType posterType) throws MovieServiceException {
+        Movie movie = getMovieByTmdbMovieId(tmdbMovieId);
         String posterPath = movie.getPosterPath();
 
         return posterService.findPoster(posterPath, posterType);
@@ -101,7 +101,6 @@ class MovieServiceImpl implements MovieService {
             throw new IllegalArgumentException(mes);
         }
     }
-
 
     private Movie convertTmdbMovieDtoToMovie(TmdbMovieDTO tmdbMovieDTO) {
         Movie movie = new Movie();
