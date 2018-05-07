@@ -20,5 +20,5 @@ public interface MovieService {
 
     Movie getMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException;
 
-    void removeMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException;
+    void deleteMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException;
 }

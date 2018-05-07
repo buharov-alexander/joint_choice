@@ -8,4 +8,6 @@ public interface PosterService {
     void saveInCache(byte[] arr, String posterPath, PosterType posterType);
 
     void savePoster(byte[] arr, String posterPath, PosterType posterType);
+
+    void deletePoster(String posterPath);
 }

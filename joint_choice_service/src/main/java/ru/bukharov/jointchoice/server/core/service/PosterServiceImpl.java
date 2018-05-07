@@ -68,6 +68,19 @@ class PosterServiceImpl implements PosterService {
         saveImage(arr, moviePosterPath + posterType.getValue() + posterPath);
     }
 
+    @Override
+    public void deletePoster(String posterPath) {
+        deletePoster(posterPath, PosterType.SMALL);
+        deletePoster(posterPath, PosterType.MIDDLE);
+    }
+
+    private void deletePoster(String posterPath, PosterType posterType) {
+        File file = new File(moviePosterPath + posterType.getValue() + posterPath);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
     private void saveImage(byte[] arr, String fullPath) {
         try {
             File file = new File(fullPath);

@@ -95,6 +95,7 @@ class MovieServiceImpl implements MovieService {
     public void deleteMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException {
         validateId(tmdbMovieId);
         Movie movie = getMovieByTmdbMovieId(tmdbMovieId);
+        posterService.deletePoster(movie.getPosterPath());
         movieRepository.delete(movie);
     }
 

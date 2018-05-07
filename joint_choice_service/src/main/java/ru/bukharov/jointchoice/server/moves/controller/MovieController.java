@@ -2,12 +2,10 @@ package ru.bukharov.jointchoice.server.moves.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
@@ -40,7 +38,7 @@ public class MovieController {
 
     @RequestMapping(value = "/tmdb", method = RequestMethod.DELETE)
     public void removeMovieByTmdbMovieId(@RequestParam("tmdbMovieId") Long tmdbMovieId) throws Exception {
-        movieService.removeMovieByTmdbMovieId(tmdbMovieId);
+        movieService.deleteMovieByTmdbMovieId(tmdbMovieId);
     }
 
     @RequestMapping(value = "/poster/{posterType}/{tmdbMovieId}",
