@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MovieDetails from '../components/movieDetails/movieDetails';
+import { getMiddlePosterUrl } from '../server/movieApi';
 
 function mapStateToProps(state) {
   return {
@@ -14,9 +16,16 @@ export default class MovieDetailsContainer extends React.Component {
     title: 'Movie Details',
   };
 
+  static propTypes = {
+    currentMovieDetails: PropTypes.object.isRequired,
+  };
+
   render() {
     return (
-      <MovieDetails {...this.props} />
+      <MovieDetails
+        {...this.props.currentMovieDetails}
+        getPoster={getMiddlePosterUrl}
+      />
     );
   }
 }

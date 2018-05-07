@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native';
-import { getMiddlePosterUrl } from '../../server/movieApi';
 
 const styles = StyleSheet.create({
   top: {
@@ -22,7 +21,11 @@ const styles = StyleSheet.create({
 
 export default class MovieDetails extends React.PureComponent {
   static propTypes = {
-    currentMovieDetails: PropTypes.object.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    originalTitle: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    getPoster: PropTypes.func.isRequired,
   }
 
   render() {
@@ -31,7 +34,8 @@ export default class MovieDetails extends React.PureComponent {
       title,
       originalTitle,
       description,
-    } = this.props.currentMovieDetails;
+      getPoster,
+    } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
@@ -39,7 +43,7 @@ export default class MovieDetails extends React.PureComponent {
           <Image
             style={styles.image}
             resizeMode="contain"
-            source={{ uri: getMiddlePosterUrl(id) }}
+            source={{ uri: getPoster(id) }}
           />
           <View style={styles.info}>
             <Text>{title}</Text>

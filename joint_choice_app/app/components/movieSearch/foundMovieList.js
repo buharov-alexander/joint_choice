@@ -4,7 +4,7 @@ import { View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { getSmallPosterUrl } from '../../server/tmdbMovieApi';
 
-const FoundMovieList = ({ foundMovies }) => (
+const FoundMovieList = ({ foundMovies, onPressToItem }) => (
   <View>
     <ScrollView>
       <List>
@@ -15,7 +15,7 @@ const FoundMovieList = ({ foundMovies }) => (
               key={tmdbMovie.id}
               title={tmdbMovie.title}
               subtitle={tmdbMovie.originalTitle}
-              onPress={() => { }}
+              onPress={() => onPressToItem(tmdbMovie)}
             />
           ))
         }
@@ -26,6 +26,7 @@ const FoundMovieList = ({ foundMovies }) => (
 
 FoundMovieList.propTypes = {
   foundMovies: PropTypes.object.isRequired,
+  onPressToItem: PropTypes.func.isRequired,
 };
 
 export default FoundMovieList;
