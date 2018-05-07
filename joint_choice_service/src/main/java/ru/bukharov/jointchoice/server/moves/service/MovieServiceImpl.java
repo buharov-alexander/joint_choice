@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bukharov.jointchoice.server.core.service.PosterService;
 import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
@@ -50,6 +51,7 @@ class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    @Transactional
     public Movie save(Movie movie) {
         //TODO: add validation
 
@@ -65,6 +67,7 @@ class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    @Transactional
     public Movie saveTmdbMovie(Long tmdbMovieId) throws Exception {
         validateId(tmdbMovieId);
         TmdbMovieDTO tmdbMovieDTO = tmdbService.getTmdbMovie(tmdbMovieId);
@@ -88,7 +91,8 @@ class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void removeMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException {
+    @Transactional
+    public void deleteMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException {
         validateId(tmdbMovieId);
         Movie movie = getMovieByTmdbMovieId(tmdbMovieId);
         movieRepository.delete(movie);

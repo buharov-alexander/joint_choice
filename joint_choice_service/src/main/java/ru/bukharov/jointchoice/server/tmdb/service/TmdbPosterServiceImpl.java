@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bukharov.jointchoice.server.core.service.PosterService;
 import ru.bukharov.jointchoice.server.core.service.PosterType;
 
@@ -27,6 +28,7 @@ class TmdbPosterServiceImpl implements TmdbPosterService {
     private PosterService posterService;
 
     @Override
+    @Transactional
     public byte[] loadAndSavePoster(String posterPath, PosterType posterType) {
         byte[] arr = loadPoster(posterPath, posterType);
         posterService.savePoster(arr, posterPath, posterType);
@@ -34,6 +36,7 @@ class TmdbPosterServiceImpl implements TmdbPosterService {
     }
 
     @Override
+    @Transactional
     public byte[] loadPoster(String posterPath, PosterType posterType) {
         byte[] arr = posterService.findInCache(posterPath, posterType);
         if (arr != null) {

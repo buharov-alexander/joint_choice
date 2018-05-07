@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.core.service.RequestService;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
@@ -61,6 +62,7 @@ class TmdbServiceImpl implements TmdbService {
     }
 
     @Override
+    @Transactional
     public void saveMoviePoster(String posterPath) {
         tmdbPosterService.loadAndSavePoster(posterPath, PosterType.SMALL);
         tmdbPosterService.loadAndSavePoster(posterPath, PosterType.MIDDLE);
