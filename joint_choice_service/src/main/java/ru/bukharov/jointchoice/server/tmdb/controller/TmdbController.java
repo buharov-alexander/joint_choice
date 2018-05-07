@@ -31,12 +31,6 @@ public class TmdbController {
         return tmdbService.getTmdbMovie(tmdbMovieId);
     }
 
-    @RequestMapping(value = "/movie", method = RequestMethod.POST)
-    public MovieDTO saveTmdbMovie(@RequestParam("tmdbMovieId") Long tmdbMovieId) throws Exception {
-        Movie movie = tmdbService.saveTmdbMovie(tmdbMovieId);
-        return assembler.convertToDto(movie);
-    }
-
     @RequestMapping(value = "/search/movie", method = RequestMethod.GET)
     public List<TmdbMovieDTO> searchTmdbMovies(@RequestParam("query") String query) throws Exception {
         return tmdbService.searchTmdbMovies(query);

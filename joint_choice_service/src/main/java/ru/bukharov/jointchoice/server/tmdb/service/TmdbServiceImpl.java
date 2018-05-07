@@ -31,8 +31,6 @@ class TmdbServiceImpl implements TmdbService {
     @Autowired
     private JsonTmdbService jsonTmdbService;
     @Autowired
-    private MovieService movieService;
-    @Autowired
     private TmdbPosterService tmdbPosterService;
 
     private Logger log = LoggerFactory.getLogger(TmdbServiceImpl.class);
@@ -44,18 +42,6 @@ class TmdbServiceImpl implements TmdbService {
         String url = TMDB_SERVICE_URL + MOVIE + "/" + tmdbMovieId + START_PARAM;
         JSONObject json = requestService.getJsonFromUrl(url);
         return jsonTmdbService.parseTmdbMovieJson(json);
-    }
-
-    @Override
-    public Movie saveTmdbMovie(Long tmdbMovieId) throws Exception {
-        validateId(tmdbMovieId);
-        TmdbMovieDTO tmdbMovieDTO = getTmdbMovie(tmdbMovieId);
-
-        Movie movie = convertTmdbMovieDtoToMovie(tmdbMovieDTO);
-        tmdbPosterService.loadAndSavePoster(movie.getPosterPath(), PosterType.SMALL);
-        tmdbPosterService.loadAndSavePoster(movie.getPosterPath(), PosterType.MIDDLE);
-        movie = movieService.save(movie);
-        return movie;
     }
 
     @Override
@@ -74,6 +60,12 @@ class TmdbServiceImpl implements TmdbService {
         return tmdbPosterService.loadPoster(tmdbMovieDTO.getPosterPath(), posterType);
     }
 
+    @Override
+    public void saveMoviePoster(String posterPath) {
+        tmdbPosterService.loadAndSavePoster(posterPath, PosterType.SMALL);
+        tmdbPosterService.loadAndSavePoster(posterPath, PosterType.MIDDLE);
+    }
+
     private void validateQuery(String query) {
         if (StringUtils.isEmpty(query)) {
             String mes = "Search query is empty";
@@ -88,16 +80,5 @@ class TmdbServiceImpl implements TmdbService {
             log.warn(mes);
             throw new IllegalArgumentException(mes);
         }
-    }
-
-    private Movie convertTmdbMovieDtoToMovie(TmdbMovieDTO tmdbMovieDTO) {
-        Movie movie = new Movie();
-        movie.setTmdbId(tmdbMovieDTO.getId());
-        movie.setTitle(tmdbMovieDTO.getTitle());
-        movie.setOriginalTitle(tmdbMovieDTO.getOriginalTitle());
-        movie.setDescription(tmdbMovieDTO.getDescription());
-        movie.setPosterPath(tmdbMovieDTO.getPosterPath());
-
-        return movie;
     }
 }

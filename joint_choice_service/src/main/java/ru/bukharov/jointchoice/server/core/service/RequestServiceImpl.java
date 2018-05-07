@@ -15,7 +15,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 @Service
-public class RequestServiceImpl implements RequestService {
+class RequestServiceImpl implements RequestService {
 
     private Logger log = LoggerFactory.getLogger(RequestServiceImpl.class);
 

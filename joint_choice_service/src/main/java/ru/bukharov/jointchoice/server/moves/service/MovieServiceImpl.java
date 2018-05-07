@@ -9,6 +9,8 @@ import ru.bukharov.jointchoice.server.core.service.PosterType;
 import ru.bukharov.jointchoice.server.moves.domain.Movie;
 import ru.bukharov.jointchoice.server.moves.exception.MovieServiceException;
 import ru.bukharov.jointchoice.server.moves.repository.MovieRepository;
+import ru.bukharov.jointchoice.server.tmdb.dto.TmdbMovieDTO;
+import ru.bukharov.jointchoice.server.tmdb.service.TmdbService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ class MovieServiceImpl implements MovieService {
     private MovieRepository movieRepository;
     @Autowired
     private PosterService posterService;
+    @Autowired
+    private TmdbService tmdbService;
 
     private Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
@@ -60,11 +64,34 @@ class MovieServiceImpl implements MovieService {
         return posterService.findPoster(posterPath, posterType);
     }
 
+    @Override
+    public Movie saveTmdbMovie(Long tmdbMovieId) throws Exception {
+        validateId(tmdbMovieId);
+        TmdbMovieDTO tmdbMovieDTO = tmdbService.getTmdbMovie(tmdbMovieId);
+
+        Movie movie = convertTmdbMovieDtoToMovie(tmdbMovieDTO);
+        tmdbService.saveMoviePoster(movie.getPosterPath());
+        movie = save(movie);
+        return movie;
+    }
+
     private void validateId(Long id) {
         if (id == null || id < 0) {
             String mes = String.format("Movie ID %d is not a positive integer", id);
             log.warn(mes);
             throw new IllegalArgumentException(mes);
         }
+    }
+
+
+    private Movie convertTmdbMovieDtoToMovie(TmdbMovieDTO tmdbMovieDTO) {
+        Movie movie = new Movie();
+        movie.setTmdbId(tmdbMovieDTO.getId());
+        movie.setTitle(tmdbMovieDTO.getTitle());
+        movie.setOriginalTitle(tmdbMovieDTO.getOriginalTitle());
+        movie.setDescription(tmdbMovieDTO.getDescription());
+        movie.setPosterPath(tmdbMovieDTO.getPosterPath());
+
+        return movie;
     }
 }

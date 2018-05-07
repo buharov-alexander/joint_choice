@@ -10,9 +10,9 @@ public interface TmdbService {
 
     TmdbMovieDTO getTmdbMovie(Long tmdbMovieId) throws Exception;
 
-    Movie saveTmdbMovie(Long tmdbMovieId) throws Exception;
-
     List<TmdbMovieDTO> searchTmdbMovies(String query) throws Exception;
 
     byte[] getMoviePoster(Long tmdbMovieId, PosterType posterType) throws Exception;
+
+    void saveMoviePoster(String posterPath);
 }

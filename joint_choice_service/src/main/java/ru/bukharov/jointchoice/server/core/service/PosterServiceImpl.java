@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Service
-public class PosterServiceImpl implements PosterService {
+class PosterServiceImpl implements PosterService {
 
     @Value("${movie.poster.path}")
     private String moviePosterPath;
