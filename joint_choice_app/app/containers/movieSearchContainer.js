@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View, ActivityIndicator } from 'react-native';
-import { searchMovies, setCurrentTmdbMovieDetails } from '../actions/tmdbMovieActions';
+import { searchMovies } from '../actions/tmdbMovieActions';
+import { setCurrentTmdbMovieDetails } from '../actions/movieDetailsActions';
 import SearchForm from '../components/movieSearch/searchForm';
 import FoundMovieList from '../components/movieSearch/foundMovieList';
 import { TYPPING_TIMEOUT } from '../constants/actionTypes';
@@ -44,7 +45,7 @@ export default class movieSearchContainer extends React.Component {
   }
 
   onPressToItem = (tmdbMovie) => {
-    this.props.actions.setCurrentTmdbMovieDetails(tmdbMovie.id);
+    this.props.actions.setCurrentTmdbMovieDetails(tmdbMovie.tmdbId);
     this.props.navigation.navigate(TMDB_MOVIE_DETAILS_SCREEN);
   }
 

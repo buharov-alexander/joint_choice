@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { getSmallPosterUrl } from '../../server/movieApi';
+import { getSmallPosterUrl } from '../../server/movieDetailsApi';
 
 const MovieList = ({ movies, onPressToItem }) => (
   <View>
@@ -11,8 +11,8 @@ const MovieList = ({ movies, onPressToItem }) => (
         {
           movies.toList().map(movie => (
             <ListItem
-              avatar={{ uri: getSmallPosterUrl(movie.id) }}
-              key={movie.id}
+              avatar={{ uri: getSmallPosterUrl(movie.tmdbId) }}
+              key={movie.tmdbId}
               title={movie.title}
               subtitle={movie.originalTitle}
               onPress={() => onPressToItem(movie)}

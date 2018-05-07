@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import MovieDetails from '../components/movieDetails/movieDetails';
-import { getMiddlePosterUrl } from '../server/tmdbMovieApi';
+import { getMiddlePosterUrl } from '../server/movieDetailsApi';
 import { CLEAR_CURRENT_TMDB_MOVIE_DETAILS } from '../constants/actionTypes';
 
 function mapStateToProps(state) {
@@ -39,7 +39,7 @@ export default class TmdbMovieDetailsContainer extends React.Component {
 
   render() {
     return (
-      this.props.currentTmdbMovieDetails.id ?
+      this.props.currentTmdbMovieDetails.tmdbId ?
         <MovieDetails
           {...this.props.currentTmdbMovieDetails}
           getPoster={getMiddlePosterUrl}

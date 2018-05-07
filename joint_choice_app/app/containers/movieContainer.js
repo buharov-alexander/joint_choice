@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadMovies, loadMovie } from '../actions/movieActions';
+import { loadMovies } from '../actions/movieActions';
+import { setCurrentTmdbMovieDetails } from '../actions/movieDetailsActions';
 import MovieList from '../components/movieList/movieList';
 import SearchMovieButton from '../components/movieList/searchMovieButton';
-import { MOVIE_DETAILS_SCREEN, MOVIE_SEARCH_SCREEN } from '../constants/screenTypes';
-import { SET_CURRENT_MOVIE_DETAILS } from '../constants/actionTypes';
+import { TMDB_MOVIE_DETAILS_SCREEN, MOVIE_SEARCH_SCREEN } from '../constants/screenTypes';
 
 function mapStateToProps(state) {
   return {
@@ -17,11 +17,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadMovies: () => dispatch(loadMovies()),
-      loadMovie: movieId => dispatch(loadMovie(movieId)),
-      setCurrentMovieDetails: movieId => dispatch({
-        type: SET_CURRENT_MOVIE_DETAILS,
-        payload: movieId,
-      }),
+      setCurrentTmdbMovieDetails: tmdbMovieId => dispatch(setCurrentTmdbMovieDetails(tmdbMovieId)),
     },
   };
 }
@@ -49,9 +45,8 @@ export default class MovieContainer extends React.Component {
   }
 
   onPressToItem = (movie) => {
-    this.props.actions.loadMovie(movie.id);
-    this.props.actions.setCurrentMovieDetails(movie.id);
-    this.props.navigation.navigate(MOVIE_DETAILS_SCREEN);
+    this.props.actions.setCurrentTmdbMovieDetails(movie.tmdbId);
+    this.props.navigation.navigate(TMDB_MOVIE_DETAILS_SCREEN);
   }
 
   render() {

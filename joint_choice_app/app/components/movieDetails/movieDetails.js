@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export default class MovieDetails extends React.PureComponent {
   static propTypes = {
-    id: PropTypes.number.isRequired,
+    tmdbId: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     originalTitle: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -30,7 +30,7 @@ export default class MovieDetails extends React.PureComponent {
 
   render() {
     const {
-      id,
+      tmdbId,
       title,
       originalTitle,
       description,
@@ -43,7 +43,7 @@ export default class MovieDetails extends React.PureComponent {
           <Image
             style={styles.image}
             resizeMode="contain"
-            source={{ uri: getPoster(id) }}
+            source={{ uri: getPoster(tmdbId) }}
           />
           <View style={styles.info}>
             <Text>{title}</Text>
