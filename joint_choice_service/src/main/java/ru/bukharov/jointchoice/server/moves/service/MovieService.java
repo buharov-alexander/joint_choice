@@ -17,4 +17,8 @@ public interface MovieService {
     byte[] getMoviePoster(Long id, PosterType posterType) throws MovieServiceException;
 
     Movie saveTmdbMovie(Long tmdbMovieId) throws Exception;
+
+    Movie getMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException;
+
+    void removeMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException;
 }

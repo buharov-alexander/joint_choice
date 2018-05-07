@@ -32,6 +32,17 @@ public class MovieController {
         return assembler.convertToDto(movie);
     }
 
+    @RequestMapping(value = "/tmdb", method = RequestMethod.GET)
+    public MovieDTO getMovieByTmdbMovieId(@RequestParam("tmdbMovieId") Long tmdbMovieId) throws Exception {
+        Movie movie = movieService.getMovieByTmdbMovieId(tmdbMovieId);
+        return assembler.convertToDto(movie);
+    }
+
+    @RequestMapping(value = "/tmdb", method = RequestMethod.DELETE)
+    public void removeMovieByTmdbMovieId(@RequestParam("tmdbMovieId") Long tmdbMovieId) throws Exception {
+        movieService.removeMovieByTmdbMovieId(tmdbMovieId);
+    }
+
     @RequestMapping(value = "/poster/{posterType}/{id}",
             method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
@@ -50,7 +61,4 @@ public class MovieController {
         Movie movie = movieService.saveTmdbMovie(tmdbMovieId);
         return assembler.convertToDto(movie);
     }
-
-
-
 }

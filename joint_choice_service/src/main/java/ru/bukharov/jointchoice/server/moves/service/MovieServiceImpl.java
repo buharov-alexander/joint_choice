@@ -75,6 +75,25 @@ class MovieServiceImpl implements MovieService {
         return movie;
     }
 
+    @Override
+    public Movie getMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException {
+        validateId(tmdbMovieId);
+        Optional<Movie> movie = movieRepository.findByTmdbId(tmdbMovieId);
+        if (!movie.isPresent()) {
+            String mes = String.format("Cannot find a movie with tmdbMovieId %s", tmdbMovieId);
+            log.warn(mes);
+            throw new MovieServiceException(mes);
+        }
+        return movie.get();
+    }
+
+    @Override
+    public void removeMovieByTmdbMovieId(Long tmdbMovieId) throws MovieServiceException {
+        validateId(tmdbMovieId);
+        Movie movie = getMovieByTmdbMovieId(tmdbMovieId);
+        movieRepository.delete(movie);
+    }
+
     private void validateId(Long id) {
         if (id == null || id < 0) {
             String mes = String.format("Movie ID %d is not a positive integer", id);
