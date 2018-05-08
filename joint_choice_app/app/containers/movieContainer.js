@@ -40,7 +40,7 @@ export default class MovieContainer extends React.Component {
     navigation: PropTypes.object.isRequired,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.actions.loadMovies();
   }
 

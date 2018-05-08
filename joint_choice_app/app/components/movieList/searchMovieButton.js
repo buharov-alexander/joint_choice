@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   searchButton: {
-    margin: 15,
+    marginRight: 30,
   },
 });
 
@@ -15,6 +15,8 @@ const SearchMovieButton = ({ onPress }) => (
       type="ionicon"
       name="md-search"
       onPress={onPress}
+      size={35}
+      underlayColor="#cccccc"
     />
   </View>
 );

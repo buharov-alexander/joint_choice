@@ -1,6 +1,16 @@
 import { SERVER_URL } from './server';
 
-export const findMovies = text => fetch(`${SERVER_URL}/jointchoice/tmdb/search/movie?query=${text}`);
+export const searchMoviesRequest = text => fetch(`${SERVER_URL}/jointchoice/tmdb/search/movie?query=${text}`);
+
+export const saveTmdbMovieRequest = tmdbMovieId => fetch(
+  `${SERVER_URL}/jointchoice/movie/tmdb?tmdbMovieId=${tmdbMovieId}`,
+  { method: 'post' },
+);
+
+export const deleteTmdbMovieRequest = tmdbMovieId => fetch(
+  `${SERVER_URL}/jointchoice/movie/tmdb?tmdbMovieId=${tmdbMovieId}`,
+  { method: 'delete' },
+);
 
 export const fetchTmdbMovie = tmdbMovieId => fetch(`${SERVER_URL}/jointchoice/tmdb/movie/${tmdbMovieId}`);
 
