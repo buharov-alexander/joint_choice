@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db_postgres:
+    image: postgres
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=jc_password
+    - POSTGRES_DB=jointchoice
+    volumes:
+       - ./database:/docker-entrypoint-initdb.d
+       - date:/var/lib/postgresql/data
+  jc_service:
+    image: buharovalexander/joint_choice_service:latest
+    ports:
+      - 8080:8080
+    environment:
+      - JOINT_CHOICE_DATABASE_USER=postgres
+      - JOINT_CHOICE_DATABASE_PASSWORD=jc_password
+    depends_on:
+      - db_postgres
+volumes:
+    date:
