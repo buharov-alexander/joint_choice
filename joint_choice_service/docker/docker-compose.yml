@@ -9,7 +9,7 @@ services:
     - POSTGRES_DB=jointchoice
     volumes:
        - ./database:/docker-entrypoint-initdb.d
-       - date:/var/lib/postgresql/data
+       - jc_service_data:/var/lib/postgresql/data
   jc_service:
     image: buharovalexander/joint_choice_service:latest
     ports:
@@ -20,4 +20,4 @@ services:
     depends_on:
       - db_postgres
 volumes:
-    date:
+    jc_service_data:
